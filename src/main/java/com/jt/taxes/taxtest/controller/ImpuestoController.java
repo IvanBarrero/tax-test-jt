@@ -2,6 +2,7 @@ package com.jt.taxes.taxtest.controller;
 
 import com.jt.taxes.taxtest.dto.FechaMovimientoDto;
 import com.jt.taxes.taxtest.dto.ImpuestoDto;
+import com.jt.taxes.taxtest.dto.ResumenPorFechaDto;
 import com.jt.taxes.taxtest.service.ImpuestoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,10 +26,15 @@ public class ImpuestoController {
 
     @PostMapping("/movimientosPorFecha")
     public String listMovementPerDate(@ModelAttribute("fecha") FechaMovimientoDto fecha, Model model) {
-        System.out.println(fecha.getFecha());
         List<ImpuestoDto> movimientos = service.getMovimientosPorFecha(fecha.getFecha());
-        System.out.println(movimientos);
         model.addAttribute("movimientos", movimientos);
+
+        ResumenPorFechaDto resumenTipoA = service.getResumenPorFecha(fecha.getFecha(), 'A');
+        model.addAttribute("resumenTipoA", resumenTipoA);
+
+        ResumenPorFechaDto resumenTipoN = service.getResumenPorFecha(fecha.getFecha(), 'N');
+        model.addAttribute("resumenTipoN", resumenTipoN);
+
         return "movimientos_por_fecha";
     }
 

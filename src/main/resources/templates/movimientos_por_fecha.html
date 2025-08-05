@@ -54,5 +54,52 @@
         </tbody>
     </table>
 </div>
+
+<br /><br /><br />
+
+<div class="container">
+    <div class="row">
+        <h3>Consulta consolidada por Cantidad y Valor de regitros con tipo horario: N</h3>
+    </div>
+    <br />
+    <table class="table table-striped table-hover table-bordered">
+        <thead>
+        <tr>
+            <th>Cantidad de Registros</th>
+            <th>Valor Total</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${resumenTipoN.numRegistros}"></td>
+            <td th:text="${resumenTipoN.valorTotal}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<br /><br /><br />
+
+<div class="container">
+    <div class="row">
+        <h3>Consulta consolidada por Cantidad y Valor de regitros con tipo horario: A</h3>
+    </div>
+    <br />
+    <table class="table table-striped table-hover table-bordered">
+        <thead>
+        <tr>
+            <th>Cantidad de Registros</th>
+            <th>Valor Total</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${resumenTipoA.numRegistros}"></td>
+            <td th:text="${resumenTipoA.valorTotal}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
 </body>
 </html>

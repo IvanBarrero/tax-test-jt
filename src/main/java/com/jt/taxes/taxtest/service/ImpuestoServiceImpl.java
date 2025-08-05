@@ -2,6 +2,7 @@ package com.jt.taxes.taxtest.service;
 
 import com.jt.taxes.taxtest.dto.ImpuestoDto;
 import com.jt.taxes.taxtest.dto.ImpuestoMapper;
+import com.jt.taxes.taxtest.dto.ResumenPorFechaDto;
 import com.jt.taxes.taxtest.reposiroty.ImpuestoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,5 +22,10 @@ public class ImpuestoServiceImpl implements ImpuestoService {
     @Override
     public List<ImpuestoDto> getMovimientosPorFecha(LocalDate date) {
         return repository.findByFechaMovimiento(date).stream().map(ImpuestoMapper::mapImpuestoToImpuestoDto).toList();
+    }
+
+    @Override
+    public ResumenPorFechaDto getResumenPorFecha(LocalDate fecha, Character tipoHorario) {
+        return repository.findResumenPorFechaDtoByFechaMovimientoAndTipoHorario(fecha, tipoHorario);
     }
 }

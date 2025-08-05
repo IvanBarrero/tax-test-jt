@@ -4,17 +4,28 @@ import lombok.*;
 
 import java.time.LocalDate;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
-@ToString
 public class ResumenPorFechaDto {
-    private LocalDate fechaMovimiento;
-
-    private Character tipoHorario;
-
-    private Integer numRegistros;
-
+    private Long numRegistros;
     private Long valorTotal;
+
+    public ResumenPorFechaDto(Long numRegistros, Long valorTotal) {
+        this.numRegistros = numRegistros;
+        this.valorTotal = valorTotal;
+    }
+
+    public Long getNumRegistros() {
+        return numRegistros;
+    }
+
+    public void setNumRegistros(Long numRegistros) {
+        this.numRegistros = numRegistros;
+    }
+
+    public Long getValorTotal() {
+        return valorTotal;
+    }
+
+    public void setValorTotal(Long valorTotal) {
+        this.valorTotal = valorTotal;
+    }
 }
