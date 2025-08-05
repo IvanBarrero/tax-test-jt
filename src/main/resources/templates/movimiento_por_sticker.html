@@ -60,5 +60,15 @@
     </table>
 </div>
 
+<div class="container row col-md-8 offset-md-2 text-center" th:if="${movimiento.isPresent}">
+    <div class="card">
+        <div class="card-body">
+            <form method="post" role="form" th:action="@{/impuestos/exportarMovimientoAXls(sticker=${movimiento.get.sticker})}">
+                <button class="btn btn-primary" type="submit">Exportar a Excel</button>
+            </form>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

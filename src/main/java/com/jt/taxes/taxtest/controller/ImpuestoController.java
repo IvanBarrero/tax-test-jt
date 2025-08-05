@@ -5,14 +5,16 @@ import com.jt.taxes.taxtest.dto.ImpuestoDto;
 import com.jt.taxes.taxtest.dto.ResumenPorFechaDto;
 import com.jt.taxes.taxtest.dto.StickerDto;
 import com.jt.taxes.taxtest.service.ImpuestoService;
+import com.jt.taxes.taxtest.utilities.ExcelGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,7 +61,23 @@ public class ImpuestoController {
         Optional<ImpuestoDto> impuestoDtoOptional = service.getImpuestoPorSticker(stickerDto.getSticker());
 
         model.addAttribute("movimiento", impuestoDtoOptional);
+        impuestoDtoOptional.ifPresent(impuestoDto -> model.addAttribute("impuesto", impuestoDto));
 
         return "movimiento_por_sticker";
+    }
+
+    @PostMapping("/exportarMovimientoAXls")
+    public ResponseEntity<byte[]> exportMovementToXls(@RequestParam Long sticker) throws IOException {
+        ExcelGenerator generator = new ExcelGenerator();
+
+        Optional<ImpuestoDto> impuestoDtoOptional = service.getImpuestoPorSticker(sticker);
+        byte[] excelBytes = generator.generateExcel(impuestoDtoOptional.get());
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=data.xlsx");
+        return ResponseEntity.ok()
+                .headers(headers)
+                .contentType(MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"))
+                .body(excelBytes);
     }
 }
