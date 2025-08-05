@@ -33,12 +33,12 @@
 
 <div class="container row col-md-8 offset-md-2">
   <div class="card">
-    <div class="card-header"><h2 class="text-centered">Fecha para consulta de movimientos</h2></div>
+    <div class="card-header"><h2 class="text-centered">Sticker para consulta de movimiento</h2></div>
     <div class="card-body">
-      <form method="post" role="form" th:action="@{/impuestos/movimientosPorFecha}" th:object="${fecha}">
+      <form method="post" role="form" th:action="@{/impuestos/movimientoPorSticker}" th:object="${sticker}">
         <div class="form-group mb-3">
-          <label class="form-label">Seleccione la fecha</label>
-          <input class="form-control" name="fecha" type="date" value="2025-03-11" th:field="*{fecha}"/>
+          <label class="form-label">Sticker</label>
+          <input class="form-control" name="sticker" type="number" placeholder="Digite el Sticker" th:field="*{sticker}"/>
         </div>
         <button class="btn btn-primary" type="submit">Enviar</button>
       </form>

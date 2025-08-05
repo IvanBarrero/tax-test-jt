@@ -33,72 +33,28 @@
 
 <div class="container">
     <div class="row">
-        <h1>Lista de Movimientos</h1>
+        <h1>Información del Sticker: [[${sticker.sticker}]]</h1>
     </div>
     <br />
     <table class="table table-striped table-hover table-bordered">
         <thead>
         <tr>
             <th>Fecha de Movimiento</th>
-            <th>Sticker</th>
+            <th>Tipo de Horario</th>
+            <th>Fecha de Recaudo</th>
             <th>Número de Identificación</th>
             <th>Número de Formulario</th>
-            <th>Valor del Movimiento</th>
+            <th>Valor</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="movimiento : ${movimientos}">
-            <td th:text="${movimiento.fechaMovimiento}"></td>
-            <td th:text="${movimiento.sticker}"></td>
-            <td th:text="${movimiento.numeroId}"></td>
-            <td th:text="${movimiento.numeroFormulario}"></td>
-            <td th:text="${movimiento.valor}"></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-
-<br /><br /><br />
-
-<div class="container">
-    <div class="row">
-        <h3>Consulta consolidada por Cantidad y Valor de regitros con tipo horario: N</h3>
-    </div>
-    <br />
-    <table class="table table-striped table-hover table-bordered">
-        <thead>
-        <tr>
-            <th>Cantidad de Registros</th>
-            <th>Valor Total</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td th:text="${resumenTipoN.numRegistros}"></td>
-            <td th:text="${resumenTipoN.valorTotal}"></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-
-<br /><br /><br />
-
-<div class="container">
-    <div class="row">
-        <h3>Consulta consolidada por Cantidad y Valor de regitros con tipo horario: A</h3>
-    </div>
-    <br />
-    <table class="table table-striped table-hover table-bordered">
-        <thead>
-        <tr>
-            <th>Cantidad de Registros</th>
-            <th>Valor Total</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td th:text="${resumenTipoA.numRegistros}"></td>
-            <td th:text="${resumenTipoA.valorTotal}"></td>
+        <tr th:if="${movimiento.isPresent}">
+            <td th:text="${movimiento.get.fechaMovimiento}"></td>
+            <td th:text="${movimiento.get.tipoHorario}"></td>
+            <td th:text="${movimiento.get.fechaRecaudo}"></td>
+            <td th:text="${movimiento.get.numeroId}"></td>
+            <td th:text="${movimiento.get.numeroFormulario}"></td>
+            <td th:text="${movimiento.get.valor}"></td>
         </tr>
         </tbody>
     </table>
